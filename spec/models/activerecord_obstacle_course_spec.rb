@@ -393,20 +393,20 @@ describe 'ActiveRecord Obstacle Course' do
     expected_result = ['Grapes', 'Bananas', 'Ice Cream', 'Figs']
 
     # ----------------------- Using Ruby -------------------------
-    items_for_user_3_third_order = []
-    grouped_orders = []
-    Order.all.each do |order|
-      if order.items
-        grouped_orders << order if order.user_id == @user_3.id
-      end
-    end
-    grouped_orders.each_with_index do |order, idx|
-      items_for_user_3_third_order = order.items.map(&:name) if idx == 2
-    end
+    # items_for_user_3_third_order = []
+    # grouped_orders = []
+    # Order.all.each do |order|
+    #   if order.items
+    #     grouped_orders << order if order.user_id == @user_3.id
+    #   end
+    # end
+    # grouped_orders.each_with_index do |order, idx|
+    #   items_for_user_3_third_order = order.items.map(&:name) if idx == 2
+    # end
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    # Solution goes here
+    items_for_user_3_third_order = User.find(3).orders[2].items.pluck(:name)
     # ------------------------------------------------------------
 
     # Expectation
