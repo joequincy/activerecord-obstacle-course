@@ -254,9 +254,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    items = Item.all - items_not_included;
-    # reasonably certain this isn't what is desired, but I can't find anything
-    # else in the docs that seems like it'd work.
+    items = Item.where.not(id: items_not_included);
     # ------------------------------------------------------------
 
     # Expectation
