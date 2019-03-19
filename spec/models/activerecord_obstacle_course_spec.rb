@@ -250,11 +250,13 @@ describe 'ActiveRecord Obstacle Course' do
     ]
 
     # ----------------------- Using Ruby -------------------------
-    items = Item.all.map { |item| item unless items_not_included.include?(item) }.compact
+    # items = Item.all.map { |item| item unless items_not_included.include?(item) }.compact
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    # Solution goes here
+    items = Item.all - items_not_included;
+    # reasonably certain this isn't what is desired, but I can't find anything
+    # else in the docs that seems like it'd work.
     # ------------------------------------------------------------
 
     # Expectation
