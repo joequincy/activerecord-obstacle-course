@@ -626,7 +626,10 @@ describe 'ActiveRecord Obstacle Course' do
     # Megan      |         24
 
     # ------------------ ActiveRecord Solution ----------------------
-    custom_results = []
+    custom_results = User.select('users.name, COUNT(items.id) AS total_item_count')
+                         .joins(orders: :items)
+                         .group(:id)
+                         .order(:name)
     # ---------------------------------------------------------------
 
     expect(custom_results[0].name).to eq(@user_2.name)
