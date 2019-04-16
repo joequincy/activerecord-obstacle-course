@@ -254,7 +254,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    items = Item.where.not(id: items_not_included);
+    items = Item.where.not(id: items_not_included)
     # ------------------------------------------------------------
 
     # Expectation
@@ -270,8 +270,9 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
-    order = Order.find(@order_3.id)
-    grouped_items = order.items.group(:name)
+    grouped_items = Item.where(orders: {id: @order_3.id})
+                        .joins(:orders)
+                        .group('items.name')
     # ------------------------------------------------------------
 
     # Expectation
@@ -495,7 +496,7 @@ describe 'ActiveRecord Obstacle Course' do
 
     # ------------------ Improved Solution ----------------------
     orders = Order.joins(:items)
-                  .where('items.id' => @item_4.id)
+                  .where(items: {id: @item_4.id})
     # -----------------------------------------------------------
 
     # Expectation
@@ -514,7 +515,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------ Improved Solution ----------------------
     orders = Order.where(user: @user_2)
                   .joins(:items)
-                  .where('items.id' => @item_4.id)
+                  .where(items: {id: @item_4.id})
     # -----------------------------------------------------------
 
     # Expectation
